@@ -22,7 +22,7 @@ class MaxIntSet
   private
 
   def is_valid?(num)
-    0 <= num && num < store.length
+    0 <= num && num < store.count
   end
 
   def validate!(num)
@@ -58,14 +58,14 @@ class IntSet
   end
 
   def num_buckets
-    store.length
+    store.count
   end
 
 end
 
 class ResizingIntSet
 
-  attr_reader :count
+  attr_reader :store, :count
 
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
@@ -94,16 +94,17 @@ class ResizingIntSet
   private
 
   def [](num)
-    @store[num % num_buckets]
+    store[num % num_buckets]
   end
 
   def num_buckets
-    @store.length
+    store.count
   end
 
   def resize!
-    elements = @store.flatten
-    @store = Array.new(2 * @count) { Array.new }
-    elements.each { |ele| self[ele] << ele } 
+    nums = store.flatten
+    @store = Array.new(num_buckets * 2) { Array.new }
+    nums.each { |num| self[num] << num } 
   end
+
 end
