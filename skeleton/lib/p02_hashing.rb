@@ -4,6 +4,9 @@ end
 
 class Array
   def hash
+    str = ''
+    each_with_index { |ele, i| str += i.to_s + ele.object_id.to_s }
+    str.to_i.hash
   end
 end
 
@@ -19,3 +22,5 @@ class Hash
     0
   end
 end
+
+p [1,2,3,4].hash
