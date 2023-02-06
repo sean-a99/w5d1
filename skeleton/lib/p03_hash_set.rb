@@ -38,7 +38,7 @@ class HashSet
 
   def resize!
     keys = store.flatten
-    store = Array.new(2 * num_buckets) { Array.new }
+    store = Array.new(num_buckets * 2) { Array.new }
     keys.each { |key| self[key] << key }
   end
 
