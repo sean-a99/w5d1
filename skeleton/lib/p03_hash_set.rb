@@ -1,6 +1,5 @@
 class HashSet
-
-  attr_accessor :store, :count
+  attr_reader :store, :count
 
   def initialize(num_buckets = 8)
     @store = Array.new(num_buckets) { Array.new }
@@ -37,9 +36,9 @@ class HashSet
   end
 
   def resize!
-    keys = store.flatten
-    store = Array.new(num_buckets * 2) { Array.new }
-    keys.each { |key| self[key] << key }
+    keys = @store.flatten
+    @store = Array.new(num_buckets * 2) { Array.new }
+    keys.each { |key| self[key.hash] << key }
   end
 
 end
